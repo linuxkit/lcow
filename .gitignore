@@ -1,0 +1,8 @@
+*.efi
+*.img
+*.swp
+*.zip
+*-kernel
+*-cmdline
+*-state
+versions.txt
