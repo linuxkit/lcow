@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - run:
+          name: Install packages
+          # ca-certificates are needed for attach_workspace (and git over https)
+          command: apt-get update && apt-get install -y ca-certificates git openssh-client curl make zip
+      - checkout
+      - run:
+          name: Configure $PATH
+          command: echo 'export PATH=/work/bin:$PATH' >> $BASH_ENV
+      - setup_remote_docker:
+          version: 17.06.1-ce
+      - run:
+          name: Create directories
+          command: mkdir -p /work/bin /work/out
+      - run:
+          name: Fetch binaries
+          command: |
+            curl -fsSL -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz
+            curl -fsSL -o /work/bin/linuxkit https://152-46932243-gh.circle-artifacts.com/0/linuxkit-linux-amd64
+            curl -fsSL -o /work/bin/moby https://309-89286561-gh.circle-artifacts.com/0/moby-linux
+            tar xfO /tmp/docker.tgz docker/docker > /work/bin/docker
+            sha256sum /work/bin/*
+            sha256sum -c <<EOF
+            6af40e74b2dbb2927882acab52d50bfc72551779d541957fc70b6adc325ee5ef  /work/bin/docker
+            ae8355a9bb3cf8197c8c9b1afec1e53622e0e40b2680736bc4f45565c7aea1b9  /work/bin/linuxkit
+            eb1df021470bc9f528ae2c55c4a802cb34e8935fa130be90bf9b147a39ec4822  /work/bin/moby
+            EOF
+      - run:
+          name: Versions
+          command: |
+            chmod +x /work/bin/linuxkit && /work/bin/linuxkit version
+            chmod +x /work/bin/moby && /work/bin/moby version
+            chmod +x /work/bin/docker && /work/bin/docker version
+      - run:
+          name: Build
+          command: make release && mv release.zip /work/out
+      - run:
+          name: Checksum
+          command: sha256sum /work/out/release.zip > /work/out/SHA256SUM
+      - store_artifacts:
+          path: /work/out
+          destination: .
