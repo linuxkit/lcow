@@ -1,6 +1,6 @@
 .PHONY: build
 build: lcow.yml Makefile
-	moby build lcow.yml
+	linuxkit build lcow.yml
 	mv lcow-kernel bootx64.efi
 	mv lcow-initrd.img initrd.img
 bootx64.efi: build
@@ -12,7 +12,6 @@ release.zip: bootx64.efi initrd.img versions.txt
 	zip $@ bootx64.efi initrd.img versions.txt
 
 versions.txt:
-	moby version > $@
 	linuxkit version >> $@
 	git rev-list -1 HEAD >> $@
 

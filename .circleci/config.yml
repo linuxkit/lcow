@@ -21,21 +21,18 @@ jobs:
           name: Fetch binaries
           command: |
             curl -fsSL -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz
-            curl -fsSL -o /work/bin/linuxkit https://152-46932243-gh.circle-artifacts.com/0/linuxkit-linux-amd64
-            curl -fsSL -o /work/bin/moby https://309-89286561-gh.circle-artifacts.com/0/moby-linux
+            curl -fsSL -o /work/bin/linuxkit https://196-46932243-gh.circle-artifacts.com/0/linuxkit-linux-amd64
             tar xfO /tmp/docker.tgz docker/docker > /work/bin/docker
             sha256sum /work/bin/*
             sha256sum -c <<EOF
             6af40e74b2dbb2927882acab52d50bfc72551779d541957fc70b6adc325ee5ef  /work/bin/docker
-            ae8355a9bb3cf8197c8c9b1afec1e53622e0e40b2680736bc4f45565c7aea1b9  /work/bin/linuxkit
-            eb1df021470bc9f528ae2c55c4a802cb34e8935fa130be90bf9b147a39ec4822  /work/bin/moby
+            908d1e149680a2ad2f5fbf4cd5e1c2bbf7ab4a4394de773a93e25dc6d234d426 /work/bin/linuxkit
             EOF
       - run:
           name: Versions
           command: |
-            chmod +x /work/bin/linuxkit && /work/bin/linuxkit version
-            chmod +x /work/bin/moby && /work/bin/moby version
             chmod +x /work/bin/docker && /work/bin/docker version
+            chmod +x /work/bin/linuxkit && /work/bin/linuxkit version
       - run:
           name: Build
           command: make release && mv release.zip /work/out
