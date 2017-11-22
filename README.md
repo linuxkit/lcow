@@ -1,5 +1,7 @@
 # LinuxKit based LCOW images
 
+[![CircleCI](https://circleci.com/gh/linuxkit/lcow.svg?style=svg)](https://circleci.com/gh/linuxkit/lcow)
+
 This repository hosts the components to build a LinuxKit based Linux
 image for Linux Containers on Windows.
 
@@ -68,24 +70,20 @@ package is called [`init-lcow`](./pkg/init-lcow).
 
 ### Prerequisites
 
-To build images you will need the [Moby
-tool](https://github.com/moby/tool), and to rebuild the individual
-packages you will need the [LinuxKit
+To build images and packages you will need the [LinuxKit
 tool](https://github.com/linuxkit/linuxkit/tree/master/src/cmd/linuxkit). You
 also need to have a working Docker installation.
 
 If you already have `go` installed you can use `go get -u
-github.com/moby/tool/cmd/moby` to install the `moby` build tool, and
-`go get -u github.com/linuxkit/linuxkit/src/cmd/linuxkit` to install
-the `linuxkit` tool.
+github.com/linuxkit/linuxkit/src/cmd/linuxkit` to install the
+`linuxkit` tool.
 
 On macOS there is a `brew tap` available. Detailed instructions are at
 [linuxkit/homebrew-linuxkit](https://github.com/linuxkit/homebrew-linuxkit),
-the short summary is
+but the short summary is:
 
 ```
 brew tap linuxkit/linuxkit
-brew install --HEAD moby
 brew install --HEAD linuxkit
 ```
 
@@ -104,7 +102,7 @@ which generates `bootx64.efi` and `initrd.img` which need to be copied to `"$env
 Alternatively, use:
 
 ```
-moby build lcow.yml
+linuxkit build lcow.yml
 ```
 
 This will generate three files: `lcow-kernel`, `lcow-initrd.img`, and
