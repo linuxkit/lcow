@@ -1,0 +1,3 @@
+FROM alpine:3.6
+ARG ARGUMENT
+RUN echo ${ARGUMENT} 
