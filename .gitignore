@@ -6,3 +6,5 @@
 *-cmdline
 *-state
 versions.txt
+/tests/_results
+/tests/bin

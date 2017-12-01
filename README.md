@@ -54,13 +54,19 @@ Remove-Item c:\lcow -Force -Recurse; mkdir c:\lcow
 .\dockerd.exe -D --experimental --data-root c:\lcow
 ```
 
+(Note: If your kernel is older than 4.14 and is configured with KASLR
+you may want to add `--storage-opt lcow.bootparameters="nokaslr"` to
+the `dockerd` command line.)
+
 You should now be able to run Linux containers on Windows, e.g.:
 
 ```
 docker run --rm -ti busybox sh
 ```
 
-If you already have `docker` installed on your system you probably want to start the daemon (and the client) on a non-standard named pipe using the `-H "npipe:////./pipe//docker_lcow"` for both.
+If you already have `docker` installed on your system you probably
+want to start the daemon (and the client) on a non-standard named pipe
+using the `-H "npipe:////./pipe//docker_lcow"` for both.
 
 
 ## Build
@@ -131,3 +137,28 @@ linuxkit pkg build -org <your hub name> -disable-content-trust pkg/init-lcow
 
 You can omit `-disable-content-trust` if your registry has Docker
 Content Trust enabled.
+
+
+## Test
+
+The [`tests`](./tests) directory contains a number of tests for LCOW
+written using [`rtf`](https://github.com/linuxkit/rtf). To run them
+you can simply execute [`RunTests.ps1`](./tests/RunTests.ps1) inside
+the `.\tests` directory. It will pick up the kernel/initrd in the
+parent directory if present. Alternatively, it can download the
+artefact from CircleCI if you supply the build number. The script will
+also download the latest version of `docker` and the version of the
+`rtf` binary.
+
+Test results will be stored in `.\tests\_results\<UUID>` directory
+where `<UUID>` is the UUID printed out during the test run.
+
+To manually run the test, make sure you have a working LCOW system set
+up. You'll also need a copy of the `rtf.exe` binary (see
+[`RunTests.ps1`](./tests/RunTests.ps1) on how to obtain it or `go get
+..` it). Further, `docker` must also be in your path.
+
+To run tests, use `rtf run` inside the `.\tests` directory. To list
+which tests are available use `rtf list` or `rtf info`. To run an
+individual test or a group of tests use `rtf run <name>`.
+
