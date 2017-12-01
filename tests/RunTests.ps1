@@ -20,6 +20,7 @@ if ( $args.Count -eq 1 ) {
         Write-Output "Could not find initial ram disk image"
         exit 1
     }
+    mkdir "$env:ProgramFiles\Linux Containers\bootx64.efi"
     if ( Test-Path ..\lcow-kernel ) {
         Copy-Item ..\lcow-kernel "$env:ProgramFiles\Linux Containers\bootx64.efi"
     } else {
