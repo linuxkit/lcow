@@ -4,7 +4,7 @@ kernel:
   tar: none
 init:
   - linuxkit/init-lcow:ee8a280abdad079922eeaf70af295d8e4905c3a5
-  - linuxkit/runc:1b0741d07949c0acc444cd6a04ee7f833443579d
+  - linuxkit/runc:7b15b00b4e3507d62e3ed8d44dfe650561cd35ff
 files:
   - path: etc/linuxkit.yml
     metadata: yaml
