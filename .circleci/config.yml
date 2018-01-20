@@ -21,12 +21,12 @@ jobs:
           name: Fetch binaries
           command: |
             curl -fsSL -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz
-            curl -fsSL -o /work/bin/linuxkit https://196-46932243-gh.circle-artifacts.com/0/linuxkit-linux-amd64
+            curl -fsSL -o /work/bin/linuxkit             https://521-46932243-gh.circle-artifacts.com/0/linuxkit-linux-amd64
             tar xfO /tmp/docker.tgz docker/docker > /work/bin/docker
             sha256sum /work/bin/*
             sha256sum -c <<EOF
             6af40e74b2dbb2927882acab52d50bfc72551779d541957fc70b6adc325ee5ef  /work/bin/docker
-            908d1e149680a2ad2f5fbf4cd5e1c2bbf7ab4a4394de773a93e25dc6d234d426 /work/bin/linuxkit
+            f3fe26a44d8662af29d0ee7bc1213464692a47308b076e60b183ec6244786697  /work/bin/linuxkit
             EOF
       - run:
           name: Versions
