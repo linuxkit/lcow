@@ -45,6 +45,22 @@ rm release.zip
 
 ### Run
 
+On recent `docker` master builds (`master-dockerproject-2018-01-20, build 44a1168a` or newer):
+
+Start the docker daemon (in an elevated PowerShell):
+
+```
+.\dockerd.exe -D --experimental
+```
+
+You should now be able to run Linux containers on Windows, e.g.:
+
+```
+docker run --platform linux --rm -ti busybox sh
+```
+
+On older `docker` master builds:
+
 Start the docker daemon (in an elevated PowerShell):
 
 ```
