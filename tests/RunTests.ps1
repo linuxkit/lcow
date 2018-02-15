@@ -6,8 +6,8 @@ if ( Test-Path "$env:ProgramFiles\Linux Containers") {
     Remove-Item "$env:ProgramFiles\Linux Containers" -Force -Recurse
 }
 if ( $args.Count -eq 1 ) {
-    $BuildNumber = $args[0]    
-    Write-Output "Downloading artefacts for build $BuildNumber"    
+    $BuildNumber = $args[0]
+    Write-Output "Downloading artefacts for build $BuildNumber"
     Invoke-WebRequest -UseBasicParsing -OutFile release.zip "https://$BuildNumber-111085629-gh.circle-artifacts.com/0/release.zip" 
     Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
     Remove-Item release.zip
@@ -20,7 +20,7 @@ if ( $args.Count -eq 1 ) {
         Write-Output "Could not find initial ram disk image"
         exit 1
     }
-    mkdir "$env:ProgramFiles\Linux Containers\bootx64.efi"
+    mkdir "$env:ProgramFiles\Linux Containers"
     if ( Test-Path ..\lcow-kernel ) {
         Copy-Item ..\lcow-kernel "$env:ProgramFiles\Linux Containers\bootx64.efi"
     } else {
@@ -34,16 +34,16 @@ if ( $args.Count -eq 1 ) {
 }
 
 if ( !(Test-Path .\bin) ) {
-    New-Item .\bin
+    New-Item -itemtype directory .\bin
 }
 
 if ( !(Test-Path .\bin\dockerd.exe) ) {
-    Write-Output "Downloading latest docker"        
+    Write-Output "Downloading latest docker"
     Invoke-WebRequest -UseBasicParsing -OutFile bin\dockerd.exe https://master.dockerproject.org/windows/x86_64/dockerd.exe
     Invoke-WebRequest -UseBasicParsing -OutFile bin\docker.exe https://master.dockerproject.org/windows/x86_64/docker.exe
 }
 
-$rtfBuildNumber = 47
+$rtfBuildNumber = 49
 if ( !(Test-Path .\bin\rtf.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\rtf.exe "https://$rtfBuildNumber-89472225-gh.circle-artifacts.com/0/rtf-windows-amd64.exe"
 }
@@ -51,14 +51,11 @@ if ( !(Test-Path .\bin\rtf.exe) ) {
 $p = [string]$pwd.Path
 $env:PATH="$env:PATH;$p\bin"
 
-# Start the docker daemon in the background
-if ( Test-Path C:\lcow ) {
-     Remove-Item C:\lcow -Force -Recurse     
+# Start the docker daemon in the background. Use a separate data-root to have a clean slate
+if ( Test-Path C:\lcow-test ) {
+     Remove-Item C:\lcow-test -Force -Recurse
 }
-mkdir C:\lcow
-$env:LCOW_SUPPORTED=1
-$env:LCOW_API_PLATFORM_IF_OMITTED="linux"
-Start-Process dockerd.exe -ArgumentList '-D', '--experimental', '--data-root', 'C:\lcow',  '--storage-opt', 'lcow.bootparameters="nokaslr"' `
+Start-Process dockerd.exe -ArgumentList '-D', '--experimental', '--data-root', 'C:\lcow-test' `
     -NoNewWindow -RedirectStandardOutput '.\bin\dockerd.out' -RedirectStandardError '.\bin\dockerd.err'
 
 Start-Sleep -Seconds 5
