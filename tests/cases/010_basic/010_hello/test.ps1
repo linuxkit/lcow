@@ -4,7 +4,7 @@
 
 Set-PSDebug -Trace 2
 
-$output = [string] (& docker run --rm hello-world 2>&1)
+$output = [string] (& docker run --platform linux --rm hello-world 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1

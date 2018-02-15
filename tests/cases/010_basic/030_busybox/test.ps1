@@ -4,7 +4,7 @@
 
 Set-PSDebug -Trace 2
 
-$output = [string] (& docker run --rm busybox uname -a 2>&1)
+$output = [string] (& docker run --platform linux --rm busybox uname -a 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1

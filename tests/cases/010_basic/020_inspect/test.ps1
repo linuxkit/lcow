@@ -7,7 +7,7 @@ Set-PSDebug -Trace 2
 $imageName = "hello-world"
 $containerName = "inspect_test"
 
-docker run --name $containerName $imageName
+docker run --platform linux --name $containerName $imageName
 if ($lastexitcode -ne 0) {
     exit 1
 }
