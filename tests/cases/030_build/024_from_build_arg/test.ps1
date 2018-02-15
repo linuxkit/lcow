@@ -8,7 +8,7 @@ Set-PSDebug -Trace 2
 
 $imageName = "build-from-build-arg"
 
-docker build -t $imageName --build-arg IMAGE=alpine:3.6 .
+docker build --platform linux -t $imageName --build-arg IMAGE=alpine:3.6 .
 if ($lastexitcode -ne 0) {
     exit 1
 }

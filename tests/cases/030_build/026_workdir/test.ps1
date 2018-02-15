@@ -8,7 +8,7 @@ Set-PSDebug -Trace 2
 
 $imageName = "build-workdir"
 
-docker build -t $imageName .
+docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }

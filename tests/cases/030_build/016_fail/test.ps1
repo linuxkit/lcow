@@ -6,7 +6,7 @@ Set-PSDebug -Trace 2
 
 $imageName = "build-fail"
 
-docker build -t $imageName .
+docker build --platform linux -t $imageName .
 if ($lastexitcode -eq 0) {
     exit 1
 }

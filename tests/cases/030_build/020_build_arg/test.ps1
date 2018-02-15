@@ -8,7 +8,7 @@ Set-PSDebug -Trace 2
 
 $imageName = "build-arg"
 
-$output = [string] (& docker build -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
+$output = [string] (& docker build --platform linux -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1
