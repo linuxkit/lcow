@@ -1,17 +1,24 @@
-# SUMMARY: Run docker run hello-world
+# SUMMARY: Pull hello-world and run it
 # LABELS:
 # REPEAT:
 
 Set-PSDebug -Trace 2
 
-$output = [string] (& docker run --platform linux --rm hello-world 2>&1)
+docker rmi hello-world
+
+docker pull --platform linux hello-world
+if ($lastexitcode -ne 0) {
+    exit 1
+}
+
+# If we pulled with --platform we should not need to specify it for run
+$output = [string] (& docker run --rm hello-world 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1
 }
 $output
 
-# Check that we use lcow
 $tmp = $output | select-string "Hello from Docker!" -SimpleMatch
 if ($tmp.length -eq 0) {
     exit 1
