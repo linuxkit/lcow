@@ -7,7 +7,7 @@ Set-PSDebug -Trace 2
 $imageName = "build-iid"
 $imageIIDFile = "build-iid.file"
 
-docker build -t $imageName --iidfile $imageIIDFile .
+docker build --platform linux -t $imageName --iidfile $imageIIDFile .
 if ($lastexitcode -ne 0) {
     exit 1
 }
