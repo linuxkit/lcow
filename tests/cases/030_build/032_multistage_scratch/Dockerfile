@@ -1,7 +1,7 @@
-FROM alpine:3.6 AS stage0
+FROM alpine:3.7 AS stage0
 RUN touch /multi-scratch0
 
-FROM alpine:3.6 AS stage1
+FROM alpine:3.7 AS stage1
 RUN touch /multi-scratch1
 
 FROM scratch

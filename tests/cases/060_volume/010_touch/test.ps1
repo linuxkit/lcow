@@ -10,7 +10,7 @@ $fileName = "foobar"
 Remove-Item -Path $fileName -Force
 
 $p = [string]$pwd.Path
-docker run --platform linux --rm -v  $p`:/test alpine:3.6 touch /test/$fileName
+docker run --platform linux --rm -v  $p`:/test alpine:3.7 touch /test/$fileName
 if ($lastexitcode -ne 0) { 
     exit 1
 }
