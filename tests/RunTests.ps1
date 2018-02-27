@@ -43,7 +43,7 @@ if ( !(Test-Path .\bin\dockerd.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\docker.exe https://master.dockerproject.org/windows/x86_64/docker.exe
 }
 
-$rtfBuildNumber = 49
+$rtfBuildNumber = 53
 if ( !(Test-Path .\bin\rtf.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\rtf.exe "https://$rtfBuildNumber-89472225-gh.circle-artifacts.com/0/rtf-windows-amd64.exe"
 }
