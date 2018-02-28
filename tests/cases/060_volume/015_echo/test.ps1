@@ -1,4 +1,4 @@
-# SUMMARY: Create (touch) a file on volume mount and check on the host
+# SUMMARY: Create a file on mounted volume and check contents on the host
 # LABELS:
 # REPEAT:
 
@@ -11,13 +11,18 @@ if (Test-Path $fileName) {
 }
 
 $p = [string]$pwd.Path
-docker run --platform linux --rm -v  $p`:/test alpine:3.7 sh -c "touch /test/$fileName"
+docker run --platform linux --rm -v  $p`:/test alpine:3.7 sh -c "echo -n $fileName > /test/$fileName"
 if ($lastexitcode -ne 0) { 
     exit 1
 }
 
 if (Test-Path $fileName -PathType leaf) {
+    $content = Get-Content $fileName -Raw
     Remove-Item -Path $fileName -Force
+    if ($content -ne $fileName) {
+        $content
+        exit 1
+    }
     exit 0
 }
 exit 1
