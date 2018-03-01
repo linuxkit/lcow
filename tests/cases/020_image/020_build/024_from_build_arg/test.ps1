@@ -6,6 +6,8 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $imageName = "build-from-build-arg"
 
 docker build --platform linux -t $imageName --build-arg IMAGE=alpine:3.7 .
@@ -15,11 +17,11 @@ if ($lastexitcode -ne 0) {
 
 docker inspect $imageName
 if ($lastexitcode -ne 0) {
-    exit 1
+    $ret = 1
 }
 
 docker rmi $imageName
 if ($lastexitcode -ne 0) {
-    exit 1
+    $ret = 1
 }
-exit 0
+exit $ret
