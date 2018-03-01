@@ -41,4 +41,8 @@ if ($lastexitcode -ne 0) {
     }
     exit 1
 }
+
+if (Test-Path $fileName) {
+    Remove-Item -Path $fileName -Force
+}
 exit 0

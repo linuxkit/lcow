@@ -12,7 +12,7 @@ if ($lastexitcode -ne 0) {
 $output
 
 # Check that we use lcow
-$tmp = $output | select-string "-linuxkit" -SimpleMatch
+$tmp = $output | select-string "Linux" -SimpleMatch
 if ($tmp.length -eq 0) {
     exit 1
 }
