@@ -4,6 +4,8 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $fileName = "hello-world.tar"
 
 docker pull --platform linux hello-world
@@ -13,11 +15,11 @@ if ($lastexitcode -ne 0) {
 
 docker image save -o $fileName hello-world
 if ($lastexitcode -ne 0) {
-    exit 1
+    $ret = 1
 }
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-    exit 0
+if (!(Test-Path $fileName)) {
+    $ret = 1
 }
-exit 1
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+exit $ret
