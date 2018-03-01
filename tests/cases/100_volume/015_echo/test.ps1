@@ -4,11 +4,11 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $fileName = "foobar"
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-}
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
 
 $p = [string]$pwd.Path
 docker run --platform linux --rm -v  $p`:/test alpine:3.7 sh -c "echo -n $fileName > /test/$fileName"
@@ -16,13 +16,15 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-if (Test-Path $fileName -PathType leaf) {
+if (!(Test-Path $fileName -PathType leaf)) {
+    $ret = 1
+} else {
     $content = Get-Content $fileName -Raw
-    Remove-Item -Path $fileName -Force
     if ($content -ne $fileName) {
         $content
-        exit 1
+        $ret = 1
     }
-    exit 0
 }
-exit 1
+
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+exit $ret
