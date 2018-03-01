@@ -1,6 +1,8 @@
 # SUMMARY: Check changes to a file mode (chmod) on a volume mount in a container
 # LABELS:
 # REPEAT:
+# See:
+# https://github.com/moby/moby/issues/35665
 
 Set-PSDebug -Trace 2
 
