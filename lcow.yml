@@ -1,5 +1,5 @@
 kernel:
-  image: linuxkit/kernel:4.14.19
+  image: linuxkit/kernel:4.14.23
   cmdline: "console=ttyS0"
   tar: none
 init:
