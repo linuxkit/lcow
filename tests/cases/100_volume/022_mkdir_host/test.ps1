@@ -4,13 +4,12 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $baseName = "foobar"
 $fileName = "baz"
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force -Recurse
-}
-
+Remove-Item -Path $baseName -Force -Recurse -ErrorAction Ignore
 New-Item -ItemType directory $baseName
 
 $p = [string]$pwd.Path
@@ -19,8 +18,9 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-if (Test-Path $baseName\$fileName -PathType container) {
-    Remove-Item -Path $baseName -Force -Recurse
-    exit 0
+if (!(Test-Path $baseName\$fileName -PathType container)) {
+    $ret = 1
 }
-exit 1
+
+Remove-Item -Path $baseName -Force -Recurse -ErrorAction Ignore
+exit $ret

@@ -1,15 +1,17 @@
 # SUMMARY: Check changes to a file mode (chmod) on a volume mount in a container
 # LABELS:
 # REPEAT:
+# See:
+# https://github.com/moby/moby/issues/35665
 
 Set-PSDebug -Trace 2
+
+$ret = 0
 
 $imageName = "chmod-container"
 $fileName = "foobar"
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-}
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) { 
@@ -19,11 +21,8 @@ if ($lastexitcode -ne 0) {
 $p = [string]$pwd.Path
 docker run --rm -v  $p`:/test $imageName /chmod_test.sh /test/$fileName
 if ($lastexitcode -ne 0) { 
-    if (Test-Path $fileName) {
-        Remove-Item -Path $fileName -Force
-    }
-    exit 1
+    $ret = 1
 }
 
-Remove-Item -Path $fileName -Force
-exit 0
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+exit $ret

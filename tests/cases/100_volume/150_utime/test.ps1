@@ -4,11 +4,11 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $fileName = "foobar"
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-}
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
 
 #
 # Create a file in a container and check on the host
@@ -20,12 +20,11 @@ docker run --rm -v  $p`:/test -e TZ=UTC alpine touch -t 197002010000.00 /test/$f
 $expected = Get-Date -Date "1970-02-01 00:00:00Z"
 $result = [datetime](Get-ItemProperty -Path $fileName -Name LastWriteTime).lastwritetime
 if ($expected -ne $result) {
+    Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
     exit 1
 }
 
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-}
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
 
 #
 # Create a file on the host and check in a container
@@ -36,13 +35,7 @@ Set-ItemProperty -Path $fileName -Name LastWriteTime -Value $ts
 # XXX This relies on the numeric time stamp being 0
 docker run --rm -v  $p`:/test -e TZ=UTC alpine sh /test/check_time.sh /test/$fileName
 if ($lastexitcode -ne 0) {
-    if (Test-Path $fileName) {
-        Remove-Item -Path $fileName -Force
-    }
-    exit 1
+    $ret = 1
 }
-
-if (Test-Path $fileName) {
-    Remove-Item -Path $fileName -Force
-}
-exit 0
+Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+exit $ret

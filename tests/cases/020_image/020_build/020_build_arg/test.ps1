@@ -6,6 +6,8 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $imageName = "build-arg"
 
 $output = [string] (& docker build --platform linux -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
@@ -18,16 +20,16 @@ $output
 # Check that it echoed the right thing
 $tmp = $output | select-string "foobar" -SimpleMatch
 if ($tmp.length -eq 0) {
-    exit 1
+    $ret = 1
 }
 
 docker inspect $imageName
 if ($lastexitcode -ne 0) {
-    exit 1
+    $ret = 1
 }
 
 docker rmi $imageName
 if ($lastexitcode -ne 0) {
-    exit 1
+    $ret = 1
 }
-exit 0
+exit $ret

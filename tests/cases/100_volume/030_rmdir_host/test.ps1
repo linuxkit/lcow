@@ -4,12 +4,11 @@
 
 Set-PSDebug -Trace 2
 
+$ret = 0
+
 $dirName = "foobar"
 
-if (Test-Path $dirName) {
-    Remove-Item -Path $dirName -Force -Recurse
-}
-
+Remove-Item -Path $dirName -Force -Recurse -ErrorAction Ignore
 New-Item -ItemType directory $dirName
 
 $p = [string]$pwd.Path
@@ -19,7 +18,7 @@ if ($lastexitcode -ne 0) {
 }
 
 if (Test-Path $dirName) {
-    Remove-Item -Path $baseName -Force -Recurse
-    exit 1
+    $ret = 1
 }
-exit 0
+Remove-Item -Path $dirName -Force -Recurse -ErrorAction Ignore
+exit $ret
