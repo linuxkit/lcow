@@ -1,9 +1,7 @@
-# SUMMARY: docker build with FROM scratch
+# SUMMARY: docker build with FROM scratch and use ADD to add a file
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/moby/moby/issues/35413
-# https://github.com/Microsoft/opengcs/issues/156
+# ISSUE: https://github.com/Microsoft/opengcs/issues/156 (closed)
 
 Set-PSDebug -Trace 2
 

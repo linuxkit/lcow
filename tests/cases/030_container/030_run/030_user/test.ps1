@@ -1,6 +1,7 @@
 # SUMMARY: Verify that docker container run --user works
 # LABELS:
 # REPEAT:
+# ISSUE: https://github.com/moby/moby/issues/36469
 
 Set-PSDebug -Trace 2
 

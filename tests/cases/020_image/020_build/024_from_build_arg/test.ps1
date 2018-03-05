@@ -1,8 +1,7 @@
 # SUMMARY: docker build with FROM defined by build arg
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/Microsoft/opengcs/issues/168
+# ISSUE: https://github.com/Microsoft/opengcs/issues/168 (closed)
 
 Set-PSDebug -Trace 2
 

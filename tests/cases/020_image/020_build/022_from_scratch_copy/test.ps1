@@ -1,13 +1,13 @@
-# SUMMARY: Multistage build
+# SUMMARY: docker build with FROM scratch and COPY a file
 # LABELS:
 # REPEAT:
-# ISSUE: https://github.com/Microsoft/opengcs/issues/169
+# ISSUE: https://github.com/Microsoft/opengcs/issues/156 (closed)
 
 Set-PSDebug -Trace 2
 
 $ret = 0
 
-$imageName = "build-multi-stage"
+$imageName = "build-from-scratch-copy"
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {

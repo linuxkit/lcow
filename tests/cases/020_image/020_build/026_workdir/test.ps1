@@ -1,8 +1,7 @@
 # SUMMARY: docker build with a WORKDIR set
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/docker/for-win/issues/1358
+# ISSUE: https://github.com/docker/for-win/issues/1358 (closed)
 
 Set-PSDebug -Trace 2
 
