@@ -1,11 +1,10 @@
 # SUMMARY: Multistage build with a FROM scratch
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/Microsoft/opengcs/issues/169
-# https://github.com/moby/moby/issues/35413
-# https://github.com/moby/moby/issues/36115
-# https://github.com/Microsoft/opengcs/issues/156
+# ISSUE: https://github.com/Microsoft/opengcs/issues/169
+# ISSUE: https://github.com/moby/moby/issues/36115
+# ISSUE: https://github.com/moby/moby/issues/35413 (closed)
+# ISSUE: https://github.com/Microsoft/opengcs/issues/156 (closed)
 
 
 Set-PSDebug -Trace 2

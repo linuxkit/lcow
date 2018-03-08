@@ -1,8 +1,7 @@
 # SUMMARY: Volume mount a single file into container
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/moby/moby/issues/35425
+# ISSUE: https://github.com/moby/moby/issues/35425
 
 Set-PSDebug -Trace 2
 

@@ -1,8 +1,7 @@
 # SUMMARY: Test COPY variations
 # LABELS:
 # REPEAT:
-# See:
-# https://github.com/moby/moby/issues/36353
+# ISSUE: https://github.com/moby/moby/issues/36353
 
 Set-PSDebug -Trace 2
 
