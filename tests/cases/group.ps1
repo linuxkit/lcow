@@ -18,8 +18,8 @@ function GroupDeinit([REF]$res) {
 
 $CMD=$args[0]
 Switch ($CMD) {
-    'init'    { GroupInit $res }
-    'deinit'  { GroupDeinit $res }
+    'init'    { GroupInit([REF]$res) }
+    'deinit'  { GroupDeinit([REF]$res) }
 }
 
 exit $res
