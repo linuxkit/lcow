@@ -26,7 +26,7 @@ if ($tmp.length -eq 0) {
     exit 1
 }
 
-docker rmi hello-world
+docker rmi --force hello-world
 if ($lastexitcode -ne 0) {
     exit 1
 }

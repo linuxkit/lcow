@@ -9,7 +9,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "build-copy"
+$imageName = $env:RT_TEST_NAME
 $testDir1 = "folder1"
 $testDir2 = "folder2"
 $testDir3 = "folder3"

@@ -9,7 +9,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "chmod-container"
+$imageName = $env:RT_TEST_NAME
 $fileName = "foobar"
 
 Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore

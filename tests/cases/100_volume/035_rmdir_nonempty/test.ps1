@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "rmdir-nonempty"
+$imageName = $env:RT_TEST_NAME
 $fileName = "output"
 
 Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore

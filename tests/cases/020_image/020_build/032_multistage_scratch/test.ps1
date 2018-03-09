@@ -13,7 +13,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "build-multi-stage-scratch"
+$imageName = $env:RT_TEST_NAME
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {

@@ -9,7 +9,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "build-arg"
+$imageName = $env:RT_TEST_NAME
 
 $output = [string] (& docker build --platform linux -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
 if ($lastexitcode -ne 0) {

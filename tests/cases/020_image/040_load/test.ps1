@@ -7,7 +7,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 . $lib
 
 $fileName = "hello-world.tar"
-$imageName = "hello-world:latest"
+$imageName = "hello-world"
 
 docker image rm hello-world
 

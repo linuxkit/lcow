@@ -6,8 +6,8 @@ $libBase = Join-Path -Path $env:RT_PROJECT_ROOT -ChildPath _lib
 $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 . $lib
 
-$imageName = "build-tag"
-$imageTagged = "build-tag:foobar"
+$imageName = $env:RT_TEST_NAME
+$imageTagged = $env:RT_TEST_NAME + ":foobar"
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {

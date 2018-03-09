@@ -9,7 +9,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "build-from-build-arg"
+$imageName = $env:RT_TEST_NAME
 
 docker build --platform linux -t $imageName --build-arg IMAGE=alpine:3.7 .
 if ($lastexitcode -ne 0) {

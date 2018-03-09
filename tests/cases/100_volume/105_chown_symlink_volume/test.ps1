@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$imageName = "chown-symlink-container"
+$imageName = $env:RT_TEST_NAME
 $fileName = "foobar"
 $linkName = "barfoo"
 
