@@ -9,16 +9,17 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 . $lib
 
 $fileName = "foobar"
+$testPath = Join-Path -Path $env:TEST_TMP -ChildPath $fileName
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
-Get-Date | Set-Content $fileName
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
-$p = [string]$pwd.Path
-$p = Join-Path -Path $p -ChildPath $fileName
-docker run --platform linux --rm -v  $p`:/test alpine:3.7 sh -c "cat test"
+Get-Date | Set-Content $testPath
+
+docker run --platform linux --rm -v  $testPath`:/test alpine:3.7 sh -c "cat test"
 if ($lastexitcode -ne 0) { 
     exit 1
 }
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit 0

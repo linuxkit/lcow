@@ -12,21 +12,19 @@ $imageName = $env:RT_TEST_NAME
 $fileName = "foobar"
 $linkName = "barfoo"
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
-Remove-Item -Path $linkName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }
 
-$p = [string]$pwd.Path
-docker run --rm -v  $p`:/test $imageName /symlink_test.sh /test/$fileName /test/$linkName
+docker run --rm -v  $env:TEST_TMP`:/test $imageName /symlink_test.sh /test/$fileName /test/$linkName
 
 if ($lastexitcode -ne 0) { 
     $ret = 1
 }
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
-Remove-Item -Path $linkName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit $ret

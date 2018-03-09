@@ -11,18 +11,20 @@ $ret = 0
 $baseName = "foobar"
 $fileName = "baz"
 
-Remove-Item -Path $baseName -Force -Recurse -ErrorAction Ignore
-New-Item -ItemType directory $baseName
+$dirPath = Join-Path -Path $env:TEST_TMP -ChildPath $baseName
+$testPath = Join-Path -Path $dirPath -ChildPath $fileName
 
-$p = [string]$pwd.Path
-docker run --platform linux --rm -v  $p`:/test alpine:3.7 sh -c "mkdir /test/$baseName/$fileName"
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+New-Item -ItemType directory -Force -Path $dirPath
+
+docker run --platform linux --rm -v  $env:TEST_TMP`:/test alpine:3.7 sh -c "mkdir /test/$baseName/$fileName"
 if ($lastexitcode -ne 0) { 
     exit 1
 }
 
-if (!(Test-Path $baseName\$fileName -PathType container)) {
+if (!(Test-Path $testPath -PathType container)) {
     $ret = 1
 }
 
-Remove-Item -Path $baseName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit $ret

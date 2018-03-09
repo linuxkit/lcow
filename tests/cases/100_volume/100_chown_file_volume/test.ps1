@@ -11,18 +11,18 @@ $ret = 0
 $imageName = $env:RT_TEST_NAME
 $fileName = "foobar"
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 docker build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) { 
     exit 1
 }
 
-$p = [string]$pwd.Path
-docker run --rm -v  $p`:/test $imageName /chown_test.sh /test/$fileName
+docker run --rm -v  $env:TEST_TMP`:/test $imageName /chown_test.sh /test/$fileName
 if ($lastexitcode -ne 0) { 
     $ret = 1
 }
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit $ret
