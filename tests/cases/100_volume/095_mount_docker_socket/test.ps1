@@ -3,12 +3,9 @@
 # REPEAT:
 # ISSUE: https://github.com/moby/moby/issues/35425
 
-Set-PSDebug -Trace 2
-
-$fileName = "foobar"
-
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
-Get-Date | Set-Content $fileName
+$libBase = Join-Path -Path $env:RT_PROJECT_ROOT -ChildPath _lib
+$lib = Join-Path -Path $libBase -ChildPath lib.ps1
+. $lib
 
 $p = [string]$pwd.Path
 docker run --platform linux --rm `
@@ -19,5 +16,4 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-Remove-Item -Path $fileName -Force -Recurse -ErrorAction Ignore
 exit 0

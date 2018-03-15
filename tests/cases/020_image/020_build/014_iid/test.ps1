@@ -2,14 +2,17 @@
 # LABELS:
 # REPEAT:
 
-Set-PSDebug -Trace 2
+$libBase = Join-Path -Path $env:RT_PROJECT_ROOT -ChildPath _lib
+$lib = Join-Path -Path $libBase -ChildPath lib.ps1
+. $lib
 
 $ret = 0
 
-$imageName = "build-iid"
-$imageIIDFile = "build-iid.file"
+$imageName = $env:RT_TEST_NAME
+$imageIIDFile = Join-Path -Path $env:TEST_TMP -ChildPath iid.file
 
-Remove-Item -Path $imageIIDFile -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 docker build --platform linux -t $imageName --iidfile $imageIIDFile .
 if ($lastexitcode -ne 0) {
@@ -27,10 +30,10 @@ if ($lastexitcode -ne 0) {
     $ret = 1
 }
 
-docker rmi $iid
+docker rmi --force $iid
 if ($lastexitcode -ne 0) {
     $ret = 1
 }
 
-Remove-Item -Path $imageIIDFile -Force -Recurse -ErrorAction Ignore
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit $ret
