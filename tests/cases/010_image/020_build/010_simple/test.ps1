@@ -18,7 +18,7 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-docker rmi $imageName
+docker image rm $imageName
 if ($lastexitcode -ne 0) {
     exit 1
 }

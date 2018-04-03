@@ -30,7 +30,7 @@ if ($lastexitcode -ne 0) {
     $ret = 1
 }
 
-docker rmi --force $iid
+docker image rm --force $iid
 if ($lastexitcode -ne 0) {
     $ret = 1
 }

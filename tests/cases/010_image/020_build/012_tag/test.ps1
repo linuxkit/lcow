@@ -24,7 +24,7 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-docker rmi $imageTagged
+docker image rm $imageTagged
 if ($lastexitcode -ne 0) {
     exit 1
 }

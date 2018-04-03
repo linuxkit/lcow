@@ -29,7 +29,7 @@ if ($lastexitcode -ne 0) {
     $ret = 1
 }
 
-docker rmi $imageName
+docker image rm $imageName
 if ($lastexitcode -ne 0) {
     $ret = 1
 }
