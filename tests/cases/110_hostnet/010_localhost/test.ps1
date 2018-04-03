@@ -32,5 +32,5 @@ if ($tmp.length -eq 0) {
     $ret = 1
 }
 
-docker kill $containerID
+docker container kill $containerID
 exit $ret

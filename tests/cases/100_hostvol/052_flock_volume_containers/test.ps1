@@ -36,7 +36,7 @@ if ($lastexitcode -eq 0) {
 }
 
 # remove the background container
-docker kill $containerName
+docker container kill $containerName
 
 Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 exit $ret
