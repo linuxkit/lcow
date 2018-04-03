@@ -1,4 +1,4 @@
-# SUMMARY: Verify docker run --read-only works
+# SUMMARY: Verify docker container run --read-only works
 # LABELS:
 # REPEAT:
 

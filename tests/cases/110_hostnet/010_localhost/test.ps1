@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$containerID = (& docker run --platform linux -d --rm -p 8080:80 nginx)
+$containerID = (& docker container run --platform linux -d --rm -p 8080:80 nginx)
 if ($lastexitcode -ne 0) { 
     exit 1
 }

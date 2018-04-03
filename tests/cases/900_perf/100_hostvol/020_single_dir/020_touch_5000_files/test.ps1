@@ -12,7 +12,7 @@ Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 $p = [string]$pwd.Path
-docker run --platform linux --rm `
+docker container run --platform linux --rm `
   -v $env:TEST_TMP`:/test `
   -v $p`:/script `
   alpine:3.7 sh /script/run.sh /test

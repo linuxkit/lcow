@@ -17,7 +17,7 @@ $testPath = Join-Path -Path $dirPath -ChildPath $fileName
 Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 New-Item -ItemType directory -Force -Path $dirPath
 
-docker run --platform linux --rm -v  $env:TEST_TMP`:/test alpine:3.7 sh -c "mkdir /test/$baseName/$fileName"
+docker container run --platform linux --rm -v  $env:TEST_TMP`:/test alpine:3.7 sh -c "mkdir /test/$baseName/$fileName"
 if ($lastexitcode -ne 0) { 
     exit 1
 }

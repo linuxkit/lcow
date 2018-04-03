@@ -20,7 +20,7 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-docker run --rm -v  $env:TEST_TMP`:/test $imageName /symlink_test.sh /test/$fileName /test/$linkName
+docker container run --rm -v  $env:TEST_TMP`:/test $imageName /symlink_test.sh /test/$fileName /test/$linkName
 
 if ($lastexitcode -ne 0) { 
     $ret = 1

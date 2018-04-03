@@ -25,7 +25,7 @@ Write-Output "Output of docker inspect of the image:"
 $output | ConvertFrom-Json | ConvertTo-Json
 
 # Now try to run it
-docker run --rm $imageName
+docker container run --rm $imageName
 if ($lastexitcode -ne 0) {
     exit 1
 }

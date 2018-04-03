@@ -11,7 +11,7 @@ $ret = 0
 $testPath = Join-Path -Path $env:TEST_TMP_ROOT -ChildPath "single-dir-touch-stat"
 
 $p = [string]$pwd.Path
-docker run --platform linux --rm `
+docker container run --platform linux --rm `
   -v $testPath`:/test `
   -v $p`:/script `
   alpine:3.7 sh /script/run.sh /test

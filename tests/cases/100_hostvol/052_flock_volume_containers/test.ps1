@@ -17,7 +17,7 @@ Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 # Check that flock works first
-docker run --platform linux --rm --name $containerName -v $env:TEST_TMP`:/test alpine:3.7 `
+docker container run --platform linux --rm --name $containerName -v $env:TEST_TMP`:/test alpine:3.7 `
   flock -x /test/$fileName echo "flock works"
 if ($lastexitcode -ne 0) {
     Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
@@ -25,11 +25,11 @@ if ($lastexitcode -ne 0) {
 }
 
 # Start a container in the background which locks the file
-docker run --platform linux --rm -d --name $containerName -v $env:TEST_TMP`:/test alpine:3.7 `
+docker container run --platform linux --rm -d --name $containerName -v $env:TEST_TMP`:/test alpine:3.7 `
   flock -x /test/$fileName sleep 1000
 
 # Start another container trying to lock the same file. This should fail
-docker run --platform linux --rm -v $env:TEST_TMP`:/test alpine:3.7 `
+docker container run --platform linux --rm -v $env:TEST_TMP`:/test alpine:3.7 `
   flock -xn /test/$fileName echo "locked although locked"
 if ($lastexitcode -eq 0) {
     $ret = 1

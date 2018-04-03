@@ -18,7 +18,7 @@ New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 New-Item -ItemType File -Path $testPath
 
-docker run --platform linux --rm -v  $env:TEST_TMP`:/test alpine:3.7 sh -c "test -f /test/$fileName"
+docker container run --platform linux --rm -v  $env:TEST_TMP`:/test alpine:3.7 sh -c "test -f /test/$fileName"
 if ($lastexitcode -ne 0) { 
     $ret = 1
 }

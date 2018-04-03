@@ -19,7 +19,7 @@ $dataSize = 100 * 1024 * 1024
 $count = $dataSize / $blockSize
 
 $p = [string]$pwd.Path
-docker run --platform linux --rm `
+docker container run --platform linux --rm `
   -v $env:TEST_TMP`:/test `
   -v $p`:/script `
   alpine:3.7 sh /script/dd_5_parallel.sh /test $blockSize $count

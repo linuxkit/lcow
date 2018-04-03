@@ -16,7 +16,7 @@ New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
 Get-Date | Set-Content $testPath
 
-docker run --platform linux --rm -v  $testPath`:/test alpine:3.7 sh -c "cat test"
+docker container run --platform linux --rm -v  $testPath`:/test alpine:3.7 sh -c "cat test"
 if ($lastexitcode -ne 0) { 
     exit 1
 }

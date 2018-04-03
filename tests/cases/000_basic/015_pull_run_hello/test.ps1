@@ -14,7 +14,7 @@ if ($lastexitcode -ne 0) {
 }
 
 # If we pulled with --platform we should not need to specify it for run
-$output = [string] (& docker run --rm hello-world 2>&1)
+$output = [string] (& docker container run --rm hello-world 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1

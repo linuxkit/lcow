@@ -14,7 +14,7 @@ if ($lastexitcode -ne 0) {
 }
 
 $p = [string]$pwd.Path
-docker run --rm -v  $p`:/test $imageName /statfs_test.sh /test
+docker container run --rm -v  $p`:/test $imageName /statfs_test.sh /test
 if ($lastexitcode -ne 0) { 
     exit 1
 }

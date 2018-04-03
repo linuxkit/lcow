@@ -19,7 +19,7 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-docker run --rm -v  $env:TEST_TMP`:/test $imageName /rmdir_test.sh /test
+docker container run --rm -v  $env:TEST_TMP`:/test $imageName /rmdir_test.sh /test
 if ($lastexitcode -ne 0) { 
     $ret = 1
 }

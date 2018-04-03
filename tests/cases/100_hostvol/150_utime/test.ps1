@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 #
 # Create a file in a container and check on the host
 #
-docker run --rm -v  $env:TEST_TMP`:/test -e TZ=UTC alpine:3.7 touch -t 197002010000.00 /test/$fileName
+docker container run --rm -v  $env:TEST_TMP`:/test -e TZ=UTC alpine:3.7 touch -t 197002010000.00 /test/$fileName
 
 # check timestamp
 $expected = Get-Date -Date "1970-02-01 00:00:00Z"
@@ -38,7 +38,7 @@ New-Item -ItemType File -Path $testPath
 Set-ItemProperty -Path $testPath -Name LastWriteTime -Value $ts
 # XXX This relies on the numeric time stamp being 0
 $p = [string]$pwd.Path
-docker run --platform linux --rm `
+docker container run --platform linux --rm `
   -v $env:TEST_TMP`:/test `
   -v $p`:/script `
   -e TZ=UTC alpine:3.7 sh /script/check_time.sh /test/$fileName
