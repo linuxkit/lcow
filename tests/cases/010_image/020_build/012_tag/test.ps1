@@ -14,7 +14,7 @@ if ($lastexitcode -ne 0) {
     exit 1
 }
 
-docker tag $imageName $imageTagged
+docker image tag $imageName $imageTagged
 if ($lastexitcode -ne 0) {
     exit 1
 }
