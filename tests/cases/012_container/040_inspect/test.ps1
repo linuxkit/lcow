@@ -17,7 +17,7 @@ if ($lastexitcode -ne 0) {
 $output = [string] (& docker container inspect $containerName 2>&1)
 if ($lastexitcode -ne 0) {
     $output
-    docker rm --force $containerName
+    docker container rm --force $containerName
     exit 1
 }
 Write-Output "Output of docker inspect of the container:"
