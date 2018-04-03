@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 docker rmi hello-world
 
-docker pull --platform linux hello-world
+docker image pull --platform linux hello-world
 if ($lastexitcode -ne 0) {
     exit 1
 }

@@ -10,7 +10,7 @@ $ret = 0
 
 $fileName = "hello-world.tar"
 
-docker pull --platform linux hello-world
+docker image pull --platform linux hello-world
 if ($lastexitcode -ne 0) {
     exit 1
 }

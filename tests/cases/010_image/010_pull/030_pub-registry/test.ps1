@@ -2,6 +2,6 @@
 # LABELS:
 # REPEAT:
 
-docker pull --platform linux gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.7
+docker image pull --platform linux gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.7
 if ($lastexitcode -ne 0) { exit 1 }
 exit 0
