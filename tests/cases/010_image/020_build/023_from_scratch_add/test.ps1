@@ -1,4 +1,4 @@
-# SUMMARY: docker build with FROM scratch and use ADD to add a file
+# SUMMARY: docker image build with FROM scratch and use ADD to add a file
 # LABELS:
 # REPEAT:
 # ISSUE: https://github.com/Microsoft/opengcs/issues/156 (closed)
@@ -11,7 +11,7 @@ $ret = 0
 
 $imageName = $env:RT_TEST_NAME
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }

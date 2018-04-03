@@ -15,7 +15,7 @@ $linkName = "barfoo"
 Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) { 
     exit 1
 }

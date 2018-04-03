@@ -1,4 +1,4 @@
-# SUMMARY: docker build with FROM defined by build arg
+# SUMMARY: docker image build with FROM defined by build arg
 # LABELS:
 # REPEAT:
 # ISSUE: https://github.com/Microsoft/opengcs/issues/168 (closed)
@@ -11,7 +11,7 @@ $ret = 0
 
 $imageName = $env:RT_TEST_NAME
 
-docker build --platform linux -t $imageName --build-arg IMAGE=alpine:3.7 .
+docker image build --platform linux -t $imageName --build-arg IMAGE=alpine:3.7 .
 if ($lastexitcode -ne 0) {
     exit 1
 }

@@ -1,4 +1,4 @@
-# SUMMARY: Simple docker build test with tagging
+# SUMMARY: Simple docker image build test with tagging
 # LABELS:
 # REPEAT:
 
@@ -9,7 +9,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 $imageName = $env:RT_TEST_NAME
 $imageTagged = $env:RT_TEST_NAME + ":foobar"
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }

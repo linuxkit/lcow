@@ -1,4 +1,4 @@
-# SUMMARY: docker build with a WORKDIR set
+# SUMMARY: docker image build with a WORKDIR set
 # LABELS:
 # REPEAT:
 # ISSUE: https://github.com/docker/for-win/issues/1358 (closed)
@@ -11,7 +11,7 @@ $ret = 0
 
 $imageName = $env:RT_TEST_NAME
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }

@@ -31,7 +31,7 @@ Copy-Item Dockerfile $testDir2\$testDir3\
 #     - test.ps1
 #     - Dockerfile
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     $ret = 1
 }

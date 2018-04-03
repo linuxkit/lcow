@@ -15,7 +15,7 @@ $ret = 0
 
 $imageName = $env:RT_TEST_NAME
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -ne 0) {
     exit 1
 }

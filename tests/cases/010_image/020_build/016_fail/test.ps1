@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $imageName = $env:RT_TEST_NAME
 
-docker build --platform linux -t $imageName .
+docker image build --platform linux -t $imageName .
 if ($lastexitcode -eq 0) {
     exit 1
 }

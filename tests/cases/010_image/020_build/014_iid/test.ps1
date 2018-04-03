@@ -1,4 +1,4 @@
-# SUMMARY: Simple docker build test with iid file
+# SUMMARY: Simple docker image build test with iid file
 # LABELS:
 # REPEAT:
 
@@ -14,7 +14,7 @@ $imageIIDFile = Join-Path -Path $env:TEST_TMP -ChildPath iid.file
 Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
 New-Item -ItemType Directory -Force -Path $env:TEST_TMP
 
-docker build --platform linux -t $imageName --iidfile $imageIIDFile .
+docker image build --platform linux -t $imageName --iidfile $imageIIDFile .
 if ($lastexitcode -ne 0) {
     exit 1
 }

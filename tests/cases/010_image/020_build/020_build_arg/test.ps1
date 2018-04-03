@@ -1,4 +1,4 @@
-# SUMMARY: docker build with build arg
+# SUMMARY: docker image build with build arg
 # LABELS:
 # REPEAT:
 # ISSUE: https://github.com/Microsoft/opengcs/issues/168 (closed)
@@ -11,7 +11,7 @@ $ret = 0
 
 $imageName = $env:RT_TEST_NAME
 
-$output = [string] (& docker build --platform linux -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
+$output = [string] (& docker image build --platform linux -t $imageName --build-arg ARGUMENT=foobar . 2>&1)
 if ($lastexitcode -ne 0) {
     $output
     exit 1
