@@ -19,7 +19,7 @@ function GroupInit([REF]$res) {
     New-Item -ItemType Directory -Force -Path $singleDirStat
     $i = 0
     While ($i -lt 5000) {
-        $fileName = "file-" + $i
+        $fileName = "file-stat-" + $i
         $filePath = Join-Path -Path $singleDirStat -ChildPath $fileName
         New-Item -ItemType File -Path $filePath
         $i += 1
@@ -30,7 +30,7 @@ function GroupInit([REF]$res) {
     New-Item -ItemType Directory -Force -Path $singleDirTouch
     $i = 0
     While ($i -lt 5000) {
-        $fileName = "file-" + $i
+        $fileName = "file-touch-" + $i
         $filePath = Join-Path -Path $singleDirTouch -ChildPath $fileName
         New-Item -ItemType File -Path $filePath
         $i += 1
@@ -41,7 +41,7 @@ function GroupInit([REF]$res) {
     New-Item -ItemType Directory -Force -Path $singleDirTouchStat
     $i = 0
     While ($i -lt 5000) {
-        $fileName = "file-" + $i
+        $fileName = "file-touch-stat-" + $i
         $filePath = Join-Path -Path $singleDirTouchStat -ChildPath $fileName
         New-Item -ItemType File -Path $filePath
         $i += 1
@@ -52,9 +52,9 @@ function GroupInit([REF]$res) {
     New-Item -ItemType Directory -Force -Path $singleDirRead
     $i = 0
     While ($i -lt 5000) {
-        $fileName = "file-" + $i
+        $fileName = "file-read-" + $i
         $filePath = Join-Path -Path $singleDirRead -ChildPath $fileName
-        $f = new-object System.IO.FileStream $fileName, Create, ReadWrite
+        $f = new-object System.IO.FileStream $filePath, Create, ReadWrite
         $f.SetLength(512)
         $f.Close()
         $i += 1
@@ -65,9 +65,9 @@ function GroupInit([REF]$res) {
     New-Item -ItemType Directory -Force -Path $singleDirReadRead
     $i = 0
     While ($i -lt 5000) {
-        $fileName = "file-" + $i
+        $fileName = "file-read-read-" + $i
         $filePath = Join-Path -Path $singleDirReadRead -ChildPath $fileName
-        $f = new-object System.IO.FileStream $fileName, Create, ReadWrite
+        $f = new-object System.IO.FileStream $filePath, Create, ReadWrite
         $f.SetLength(512)
         $f.Close()
         $i += 1
