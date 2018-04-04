@@ -43,6 +43,14 @@ if ( !(Test-Path .\bin\dockerd.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\docker.exe https://master.dockerproject.org/windows/x86_64/docker.exe
 }
 
+$composeRelease = "1.21.0-rc1"
+if ( !(Test-Path .\bin\docker-compose.exe) ) {
+    Write-Output "Downloading latest docker-compose"
+    # Force to TLS 1.2
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest -UseBasicParsing -OutFile bin\docker-compose.exe "https://github.com/docker/compose/releases/download/$composeRelease/docker-compose-Windows-x86_64.exe"
+}
+
 $rtfBuildNumber = 53
 if ( !(Test-Path .\bin\rtf.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\rtf.exe "https://$rtfBuildNumber-89472225-gh.circle-artifacts.com/0/rtf-windows-amd64.exe"
