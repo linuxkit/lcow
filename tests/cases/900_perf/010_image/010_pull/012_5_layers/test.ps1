@@ -8,6 +8,15 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $imageName = "linuxkit/test-lcow:5layers"
 
+docker rmi $imageName
+
+$start = Get-Date
+
 docker image pull --platform linux $imageName
 if ($lastexitcode -ne 0) { exit 1 }
+
+$end = Get-Date
+$diff = (($end - $start).TotalSeconds).ToString("#.##s")
+Write-Output "RT_BENCHMARK_RESULT: $diff"
+
 exit 0

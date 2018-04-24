@@ -8,17 +8,23 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
-New-Item -ItemType Directory -Force -Path $env:TEST_TMP
+$testPath = $env:TEST_TMP
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $testPath
+New-Item -ItemType Directory -Force -Path $testPath
+
+$start = Get-Date
 
 $p = [string]$pwd.Path
 docker container run --platform linux --rm `
-  -v $env:TEST_TMP`:/test `
+  -v $testPath`:/test `
   -v $p`:/script `
   alpine:3.7 sh /script/run.sh /test 512
-if ($lastexitcode -ne 0) {
-    $ret = 1
-}
+if ($lastexitcode -ne 0) { $ret = 1 }
 
-Remove-Item -Force -Recurse -ErrorAction Ignore -Path $env:TEST_TMP
+$end = Get-Date
+$diff = (($end - $start).TotalSeconds).ToString("#.##s")
+Write-Output "RT_BENCHMARK_RESULT: $diff"
+
+Remove-Item -Force -Recurse -ErrorAction Ignore -Path $testPath
+
 exit $ret
