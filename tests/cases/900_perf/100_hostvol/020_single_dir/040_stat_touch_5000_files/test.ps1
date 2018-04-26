@@ -8,7 +8,7 @@ $lib = Join-Path -Path $libBase -ChildPath lib.ps1
 
 $ret = 0
 
-$testPath = $env:TEST_TMP_ROOT
+$testPath = $env:TEST_TMP
 Remove-Item -Force -Recurse -ErrorAction Ignore -Path $testPath
 New-Item -ItemType Directory -Force -Path $testPath
 $i = 0
