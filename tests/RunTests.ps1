@@ -51,7 +51,7 @@ if ( !(Test-Path .\bin\docker-compose.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\docker-compose.exe "https://github.com/docker/compose/releases/download/$composeRelease/docker-compose-Windows-x86_64.exe"
 }
 
-$rtfBuildNumber = 60
+$rtfBuildNumber = 69
 if ( !(Test-Path .\bin\rtf.exe) ) {
     Invoke-WebRequest -UseBasicParsing -OutFile bin\rtf.exe "https://$rtfBuildNumber-89472225-gh.circle-artifacts.com/0/rtf-windows-amd64.exe"
 }
