@@ -1,15 +1,15 @@
 .PHONY: build
 build: lcow.yml Makefile
 	linuxkit build lcow.yml
-	mv lcow-kernel bootx64.efi
+	mv lcow-kernel kernel
 	mv lcow-initrd.img initrd.img
-bootx64.efi: build
+kernel: build
 initrd.img: build
 
 .PHONY: release
 release: release.zip
-release.zip: bootx64.efi initrd.img versions.txt
-	zip $@ bootx64.efi initrd.img versions.txt
+release.zip: kernel initrd.img versions.txt
+	zip $@ kernel initrd.img versions.txt
 
 versions.txt:
 	linuxkit version >> $@

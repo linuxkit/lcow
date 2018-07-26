@@ -5,6 +5,7 @@
 *-kernel
 *-cmdline
 *-state
+/kernel
 versions.txt
 /tests/_results
 /tests/bin
