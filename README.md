@@ -120,7 +120,7 @@ Simply type:
 make
 ```
 
-which generates `bootx64.efi` and `initrd.img` which need to be copied to `"$env:ProgramFiles\Linux Containers\bootx64.efi"` on your Windows system.
+which generates `kernel` and `initrd.img` which need to be copied to `"$env:ProgramFiles\Linux Containers\kernel"` on your Windows system.
 
 
 Alternatively, use:
@@ -131,7 +131,7 @@ linuxkit build lcow.yml
 
 This will generate three files: `lcow-kernel`, `lcow-initrd.img`, and
 `lcow-cmdline`. `lcow-kernel` needs to be copied to
-`"$env:ProgramFiles\Linux Containers\bootx64.efi"` and
+`"$env:ProgramFiles\Linux Containers\kernel"` and
 `lcow-initrd.img` to `"$env:ProgramFiles\Linux
 Containers\initrd.img"`.
 
