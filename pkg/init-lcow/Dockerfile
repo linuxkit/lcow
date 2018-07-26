@@ -1,4 +1,4 @@
-FROM linuxkit/alpine:6264e5b39af8eb1da7ffa4c05a7ccc597da01197 AS mirror
+FROM linuxkit/alpine:8a89682421abf0d886d777235a05f4a04a736df2 AS mirror
 RUN mkdir -p /out/etc/apk && cp -r /etc/apk/* /out/etc/apk/
 RUN apk add --no-cache --initdb -p /out \
     alpine-baselayout \
@@ -7,7 +7,7 @@ RUN apk add --no-cache --initdb -p /out \
     musl
 RUN rm -rf /out/etc/apk /out/lib/apk /out/var/cache
 
-FROM linuxkit/alpine:6264e5b39af8eb1da7ffa4c05a7ccc597da01197 AS build
+FROM linuxkit/alpine:8a89682421abf0d886d777235a05f4a04a736df2 AS build
 ENV OPENGCS_REPO=https://github.com/Microsoft/opengcs
 ENV OPENGCS_COMMIT=2398de591e9c577c112c6eeb7dd7659ecc77a46e
 RUN apk add --no-cache build-base curl git go linux-headers musl-dev
