@@ -12,7 +12,7 @@ if ( $args.Count -eq 1 ) {
     Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
     Remove-Item release.zip
 } else {
-    if ( !(Test-Path ..\lcow-kernel) -and !(Test-Path ..\bootx64.efi) ) {
+    if ( !(Test-Path ..\lcow-kernel) -and !(Test-Path ..\kernel) ) {
         Write-Output "Could not find kernel"
         exit 1
     }
@@ -22,9 +22,9 @@ if ( $args.Count -eq 1 ) {
     }
     mkdir "$env:ProgramFiles\Linux Containers"
     if ( Test-Path ..\lcow-kernel ) {
-        Copy-Item ..\lcow-kernel "$env:ProgramFiles\Linux Containers\bootx64.efi"
+        Copy-Item ..\lcow-kernel "$env:ProgramFiles\Linux Containers\kernel"
     } else {
-        Copy-Item ..\bootx64.efi "$env:ProgramFiles\Linux Containers\bootx64.efi"        
+        Copy-Item ..\kernel "$env:ProgramFiles\Linux Containers\kernel"
     }
     if ( Test-Path ..\lcow-initrd.img ) {
         Copy-Item ..\lcow-initrd.img "$env:ProgramFiles\Linux Containers\initrd.img"
