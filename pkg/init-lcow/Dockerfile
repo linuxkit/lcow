@@ -15,15 +15,14 @@ ENV GOPATH=/go PATH=$PATH:/go/bin
 RUN git clone $OPENGCS_REPO /go/src/github.com/Microsoft/opengcs && \
     cd /go/src/github.com/Microsoft/opengcs && \
     git checkout $OPENGCS_COMMIT && \
-    make bin/vsockexec bin/gcs bin/gcstools && \
+    make bin/init bin/vsockexec bin/gcs bin/gcstools && \
     cd bin && \
-    for tool in tar2vhd vhd2tar exportSandbox netnscfg remotefs; do ln -s gcstools $tool; done
+    for tool in vhd2tar exportSandbox netnscfg remotefs; do ln -s gcstools $tool; done
     
 RUN mkdir -p /out/bin && \
-    cp -r /go/src/github.com/Microsoft/opengcs/bin/* /out/bin && \
-    cp -r /go/src/github.com/Microsoft/opengcs/init/init /out/init && \
-    chmod 755 /out/init && \
     mkdir -p /out/sbin && \
+    cp -r /go/src/github.com/Microsoft/opengcs/bin/* /out/bin && \
+    mv /out/bin/init /out && \
     curl -fSL "https://raw.githubusercontent.com/mirror/busybox/38d966943f5288bb1f2e7219f50a92753c730b14/examples/udhcp/simple.script" -o /out/sbin/udhcpc_config.script && \
     chmod ugo+rx /out/sbin/udhcpc_config.script && \
     git -C /go/src/github.com/Microsoft/opengcs rev-parse HEAD > /out/gcs.commit && \
