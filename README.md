@@ -164,7 +164,7 @@ written using [`rtf`](https://github.com/linuxkit/rtf). To run them
 you can simply execute [`RunTests.ps1`](./tests/RunTests.ps1) inside
 the `.\tests` directory. It will pick up the kernel/initrd in the
 parent directory if present. Alternatively, it can download the
-artefact from CircleCI if you supply the build number. The script will
+artifact from CircleCI if you supply the build number. The script will
 also download the latest version of `docker` and the version of the
 `rtf` binary.
 
