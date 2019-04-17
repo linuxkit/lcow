@@ -1,11 +1,11 @@
 kernel:
   # For now use an older kernel. See https://github.com/linuxkit/linuxkit/issues/3120
-  image: linuxkit/kernel:4.19.27
+  image: linuxkit/kernel:4.19.34
   cmdline: "console=ttyS0"
   tar: none
 init:
-  - linuxkit/init-lcow:15f50743b68117f4db1158c89530d47affbbd07b
-  - linuxkit/runc:606971451ea29b4238029804ca638f9f85caf5af
+  - linuxkit/init-lcow:e622118d49da5e1bea01e7cdf414c491d8b7c015
+  - linuxkit/runc:v0.7
 files:
   - path: etc/linuxkit.yml
     metadata: yaml
