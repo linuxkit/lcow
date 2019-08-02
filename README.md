@@ -30,8 +30,8 @@ For now, you need a recent version of `docker`, such as a nightly
 build from the master branch. In PowerShell:
 
 ```
-Invoke-WebRequest -UseBasicParsing -OutFile dockerd.exe https://master.dockerproject.org/windows/x86_64/dockerd.exe
-Invoke-WebRequest -UseBasicParsing -OutFile docker.exe https://master.dockerproject.org/windows/x86_64/docker.exe
+Invoke-WebRequest -UseBasicParsing -OutFile docker.zip https://master.dockerproject.com/windows/x86_64/docker.zip
+Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
 ```
 
 Next, you need to get the LinuxKit images. You can either build them
