@@ -1,6 +1,6 @@
 kernel:
   # For now use an older kernel. See https://github.com/linuxkit/linuxkit/issues/3120
-  image: linuxkit/kernel:4.19.34
+  image: linuxkit/kernel:4.19.28
   cmdline: "console=ttyS0"
   tar: none
 init:
