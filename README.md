@@ -5,10 +5,8 @@
 This repository hosts the components to build a LinuxKit based Linux
 image for Linux Containers on Windows.
 
-**Note:** LCOW support is currently **experimental** and under active
-development. 
-
-**Note:** Issues are currently disabled on this project. For LinuxKit specific issues, please file an issue under [linuxkit/linuxkit](https://github.com/linuxkit/linuxkit). For general LCOW issues, consider opening an issue under [moby/moby](https://github.com/moby/moby)
+**Note:** LCOW support was **experimental** and is no longer being developed. This
+repository is now archived. 
 
 
 ## Use
